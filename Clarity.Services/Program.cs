@@ -1,13 +1,10 @@
 ﻿namespace Clarity.Services
 {
-    using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
     using Core;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
 
     public class Program
     {
@@ -15,42 +12,11 @@
         {
             using (var tokenSource = new CancellationTokenSource())
             {
-                await new HostBuilder()
-                    .ConfigureHostConfiguration(configBuilder =>
-                    {
-                        configBuilder.SetBasePath(Directory.GetCurrentDirectory());
-                        configBuilder.AddJsonFile(
-                            path: "hostsettings.json",
-                            optional: true);
-                        configBuilder.AddEnvironmentVariables();
-                        configBuilder.AddCommandLine(args);
-                    })
-                    .ConfigureAppConfiguration((context, configBuilder) =>
-                    {
-                        configBuilder.AddJsonFile(
-                            path: "appsettings.json",
-                            optional: true);
-                        configBuilder.AddJsonFile(
-                            path: $"appsettings.{context.HostingEnvironment.EnvironmentName}.json",
-                            optional: true);
-                        configBuilder.AddEnvironmentVariables();
-                        configBuilder.AddAzureKeyVault();
-                        configBuilder.AddCommandLine(args);
-                    })
-                    .ConfigureServices((context, services) =>
-                    {
-                        services.Configure<EmailOptions>(context.Configuration.GetSection(nameof(EmailOptions)));
-                        services.Configure<StorageOptions>(context.Configuration.GetSection(nameof(StorageOptions)));
-                        services.Configure<ServiceBusOptions>(context.Configuration.GetSection(nameof(ServiceBusOptions)));
-                        services.AddSingleton<IEmailService, SendGridEmailService>();
-                        services.AddSingleton<IStorageService, AzureBlobStorageService>();
-                        services.AddHostedService<EmailQueueClient>();
-                    })
-                    .ConfigureLogging(loggingBuilder =>
-                    {
-                        loggingBuilder.AddConsole();
-                        loggingBuilder.AddLogging();
-                    })
+                await WebHost.CreateDefaultBuilder(args)
+                    .ConfigureAppConfiguration(configBuilder => configBuilder.AddAzureKeyVault())
+                    .ConfigureLogging(loggingBuilder => loggingBuilder.AddLogging())
+                    .UseApplicationInsights()
+                    .UseStartup<Startup>()
                     .Build()
                     .RunAsync(tokenSource.Token);
             }

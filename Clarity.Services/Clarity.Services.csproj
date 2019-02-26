@@ -1,22 +1,30 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Clarity.Services</RootNamespace>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>0ba7bbef-854c-4e27-8fe7-223115fff8ba</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/71eb0568-25ab-4be5-b85a-a043d609410f/resourcegroups/Default-ApplicationInsights-WestUS2/providers/microsoft.insights/components/DotNetCore</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/71eb0568-25ab-4be5-b85a-a043d609410f/resourcegroups/Default-ApplicationInsights-WestUS2/providers/microsoft.insights/components/DotNetCore</ApplicationInsightsAnnotationResourceId>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Connected Services\Application Insights\ConnectedService.json" />
+    <_ContentIncludedByDefault Remove="Connected Services\Key Vault\ConnectedService.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Clarity.Core.Extensions" Version="1.1.0-CI-20190226-110427" />
     <PackageReference Include="Clarity.Core.QueueClients" Version="1.0.0-CI-20190226-114152" />
     <PackageReference Include="Clarity.Core.Services" Version="1.1.0-CI-20190226-105938" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="**\*.json" Exclude="bin\**\*;obj\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.0-beta2" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>
