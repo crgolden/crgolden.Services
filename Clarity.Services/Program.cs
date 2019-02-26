@@ -30,8 +30,8 @@
                     configBuilder.AddJsonFile(
                         path: $"appsettings.{context.HostingEnvironment.EnvironmentName}.json",
                         optional: true);
-                    configBuilder.AddAzureKeyVault();
                     configBuilder.AddEnvironmentVariables();
+                    configBuilder.AddAzureKeyVault();
                     configBuilder.AddCommandLine(args);
                 })
                 .ConfigureServices((context, services) =>
