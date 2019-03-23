@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Clarity.Services": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7001/",
+      "environmentVariables": {
+        "ASPNETCORE_HTTPS_PORT": "7001",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
