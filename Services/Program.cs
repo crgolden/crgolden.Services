@@ -21,7 +21,7 @@
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(configBuilder => configBuilder.AddAzureKeyVault())
-                .UseSerilog("Clarity.Services")
+                .UseSerilog("Clarity.Services", true)
                 .UseStartup<Startup>()
                 .Build();
     }
