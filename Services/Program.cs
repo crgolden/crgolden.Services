@@ -1,4 +1,4 @@
-﻿namespace Clarity.Services
+﻿namespace crgolden.Services
 {
     using System.Threading;
     using System.Threading.Tasks;
@@ -21,7 +21,7 @@
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(configBuilder => configBuilder.AddAzureKeyVault())
-                .UseSerilog("Clarity.Services", true)
+                .UseSerilog("crgolden.Services", true)
                 .UseStartup<Startup>()
                 .Build();
     }

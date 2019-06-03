@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Clarity.Services": {
+    "crgolden.Services": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:7001/",
