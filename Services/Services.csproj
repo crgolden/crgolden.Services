@@ -20,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="crgolden.Core.Extensions" Version="1.0.2" />
-    <PackageReference Include="crgolden.Core.QueueClients" Version="1.0.1" />
-    <PackageReference Include="crgolden.Core.Services" Version="1.0.2" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.0" />
+    <PackageReference Include="crgolden.Core.Extensions" Version="1.0.0" />
+    <PackageReference Include="crgolden.Core.QueueClients" Version="1.0.0" />
+    <PackageReference Include="crgolden.Core.Services" Version="1.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
